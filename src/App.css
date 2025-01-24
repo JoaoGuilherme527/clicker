@@ -35,4 +35,8 @@
             font-size: .7em;
         }
     }
+    button{
+        background-color: transparent;
+        border: none;
+    }
 }
