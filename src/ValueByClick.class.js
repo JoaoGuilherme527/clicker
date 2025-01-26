@@ -11,7 +11,7 @@ export class ValueByClick {
     }
 
     increaseCost() {
-        this.cost = Number((this.cost + this.cost * 1.5).toFixed(1))
+        this.cost = Number((this.cost + this.cost * 1).toFixed(1))
     }
     increaseValue() {
         this.valueByClick = Number((this.valueByClick + this.valueByClick * 0.5).toFixed(1))

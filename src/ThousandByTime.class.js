@@ -13,7 +13,7 @@ export class ThousandByTime {
     }
 
     increaseCost() {
-        this.cost = this.cost * 4
+        this.cost = this.cost * 3
     }
 
     increaseValue() {
