@@ -12,7 +12,9 @@
     width: 70%;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     .currentAmountValue {
+        width: 100%;
         display: flex;
         gap: 5px;
         padding: 8px 20px;
