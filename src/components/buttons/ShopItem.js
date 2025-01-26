@@ -1,6 +1,9 @@
-export default function ShopItem({name, onClick, description, cost}) {
+export default function ShopItem({name, onClick, description, cost, amount}) {
     return (
-        <div className="shopItem" onClick={onClick}>
+        <div
+            className={`shopItem ${amount >= cost ? 'showItem' : ''}`}
+            onClick={onClick}
+        >
             <div>
                 <p>{name}</p>
                 <p>{description}</p>
