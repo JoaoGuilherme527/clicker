@@ -9,20 +9,20 @@
 .currentAmountValueWrapper {
     display: flex;
     flex-direction: column;
-    padding: 8px 20px;
-    border-radius: 8px;
-    border: 1px solid white;
-    outline: 1px solid #3a3a3a;
-    background-color: #3a3a3a;
-    color: white;
     width: 70%;
     align-items: center;
     justify-content: center;
-    .currentAmountValue{
+    .currentAmountValue {
         display: flex;
         gap: 5px;
+        padding: 8px 20px;
+        border-radius: 8px;
+        border: 1px solid white;
+        outline: 1px solid #3a3a3a;
+        background-color: #3a3a3a;
+        color: white;
     }
-    p{
+    p {
         font-size: 0.4em;
     }
 }
