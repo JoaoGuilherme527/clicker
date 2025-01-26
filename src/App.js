@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import {useEffect, useState, useMemo} from "react"
+import {useEffect, useState, useMemo, useLayoutEffect} from "react"
 import "./App.css"
 import ShopItem from "./components/buttons/ShopItem"
 import {ValueBySeconds} from "./ValueBySeconds.class.js"
@@ -110,6 +110,10 @@ function App() {
     useEffect(() => {
         localStorage.setItem("currentAmount", currentAmountValue.toFixed(1))
     }, [currentAmountValue])
+
+    useLayoutEffect(() => {
+      localStorage.clear()
+    }, [])
 
     return (
         <main className="main" onClick={handleMainClick}>
