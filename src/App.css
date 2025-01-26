@@ -46,7 +46,7 @@
 }
 
 .shopItem {
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: space-between;
     gap: 20px;
