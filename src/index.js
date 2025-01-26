@@ -7,10 +7,7 @@ import reportWebVitals from "./reportWebVitals"
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
     <React.StrictMode>
-            <head>
-                <meta name="viewport" content="width=device-width, user-scalable=no" />
-            </head>
-            <App />
+        <App />
     </React.StrictMode>
 )
 
