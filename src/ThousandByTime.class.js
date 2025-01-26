@@ -27,7 +27,7 @@ export class ThousandByTime {
     showValues() {
         return {
             cost: this.cost,
-            time: this.time,
+            time: this.time - 10,
             value: this.value,
         }
     }

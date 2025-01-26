@@ -124,6 +124,7 @@ function App() {
                     {valueBySeconds.convert(currentAmountValue)}
                 </div>
                 <p>per second: $ {valueBySeconds.getValues().value}</p>
+                {thousandByTime.getValues().value > 0 ? <p>$ 1.000 each {thousandByTime.getValues().time} seconds</p> : <></>}
             </div>
             <button className="mainButton">CLICK</button>
 
