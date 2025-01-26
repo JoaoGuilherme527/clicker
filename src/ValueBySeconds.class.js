@@ -24,16 +24,16 @@ export class ValueBySeconds {
     }
 
     increaseCost() {
-        this.cost = Number((this.cost + this.cost * 0.05).toFixed(1))
+        this.cost = Number((this.cost + this.cost * 0.12).toFixed(1))
     }
     increaseValue() {
-        this.valueBySeconds = Number((this.valueBySeconds + 0.4).toFixed(1))
+        this.valueBySeconds = Number((this.valueBySeconds + 1).toFixed(1))
     }
 
     showValues() {
         return {
             cost: this.cost,
-            value: Number((this.valueBySeconds + 0.4).toFixed(1)),
+            value: Number((this.valueBySeconds + 1).toFixed(1)),
         }
     }
 
