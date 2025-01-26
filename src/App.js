@@ -21,7 +21,7 @@ function App() {
 
     const thousandByTime = useMemo(() => {
         const isStorage = localStorage.getItem("thousandByTime")
-        const {cost, time, value} = isStorage ? JSON.parse(isStorage) : {cost: 1000, time: 60, value: 0}
+        const {cost, time, value} = isStorage ? JSON.parse(isStorage) : {cost: 1000, time: 70, value: 0}
         return new ThousandByTime(cost, time, value)
     }, [])
     const storageAmount = localStorage.getItem("currentAmount") ? localStorage.getItem("currentAmount") : 0
