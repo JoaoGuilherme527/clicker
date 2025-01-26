@@ -123,8 +123,8 @@ function App() {
                     {currentAmountValue >= 1000000 ? formatNumber(currentAmountValue).slice(0, 5) : formatNumber(currentAmountValue)}
                     {valueBySeconds.convert(currentAmountValue)}
                 </div>
-                <p>per second: $ {valueBySeconds.getValues().value}</p>
                 {thousandByTime.getValues().value > 0 ? <p>$ 1.000 each {thousandByTime.getValues().time} seconds</p> : <></>}
+                <p>per second: $ {valueBySeconds.getValues().value}</p>
             </div>
             <button className="mainButton">CLICK</button>
 
