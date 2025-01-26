@@ -5,6 +5,7 @@ import "./App.css"
 import ShopItem from "./components/buttons/ShopItem"
 import {ValueBySeconds} from "./ValueBySeconds.class.js"
 import {ValueByClick} from "./ValueByClick.class.js"
+import {ThousandByTime} from "./ThousandByTime.class.js"
 
 function App() {
     const valueBySeconds = useMemo(() => {
@@ -17,9 +18,16 @@ function App() {
         const {cost, value} = isStorage ? JSON.parse(isStorage) : {cost: 200, value: 1}
         return new ValueByClick(cost, value)
     }, [])
-    const storageAmount = localStorage.getItem("currentAmount") ? localStorage.getItem("currentAmount") : 0n
+
+    const thousandByTime = useMemo(() => {
+        const isStorage = localStorage.getItem("thousandByTime")
+        const {cost, time, value} = isStorage ? JSON.parse(isStorage) : {cost: 1000, time: 60, value: 0}
+        return new ThousandByTime(cost, time, value)
+    }, [])
+    const storageAmount = localStorage.getItem("currentAmount") ? localStorage.getItem("currentAmount") : 0
     const [currentAmountValue, setCurrentAmountValue] = useState(Number(storageAmount))
-    const [isReload, setIsReload] = useState(false)
+    const [isBySecondsReload, setIsBySecondsReload] = useState(false)
+    const [isByTimeReload, setIsByTimeReload] = useState(false)
     const [popups, setPopups] = useState([])
 
     const increaseCurrentAmountValue = (value, isMainClick) => {
@@ -46,18 +54,29 @@ function App() {
         }, 2000)
     }
 
+    const formatNumber = (params) => {
+        return new Intl.NumberFormat("de-DE").format(Number(params.toFixed(0)))
+    }
+
     const handleBySecondsPurchase = () => {
         if (currentAmountValue < valueBySeconds.getValues().cost) return
         decreaseCurrentAmountValue(valueBySeconds.getValues().cost)
         valueBySeconds.increaseBoth()
 
-        setIsReload(!isReload)
+        setIsBySecondsReload(!isBySecondsReload)
     }
 
     const handleClickPurchase = () => {
         if (currentAmountValue < valueByClick.getValues().cost) return
         decreaseCurrentAmountValue(valueByClick.getValues().cost)
         valueByClick.increaseBoth()
+    }
+
+    const handleThousandByTime = () => {
+        if (currentAmountValue < thousandByTime.getValues().cost || thousandByTime.getValues().time === 10) return
+        decreaseCurrentAmountValue(thousandByTime.getValues().cost)
+        thousandByTime.increase()
+        setIsByTimeReload(!isByTimeReload)
     }
 
     const handleMainClick = (e) => {
@@ -73,16 +92,24 @@ function App() {
             increaseCurrentAmountValue(valueBySeconds.getValues().value)
         }, 1000)
 
-        return () => clearInterval(interval)
-    }, [isReload])
+        return () => {
+            clearInterval(interval)
+        }
+    }, [isBySecondsReload])
+
+    useEffect(() => {
+        const thousandInterval = setInterval(() => {
+            increaseCurrentAmountValue(thousandByTime.getValues().value)
+        }, thousandByTime.getValues().time * 1000)
+
+        return () => {
+            clearInterval(thousandInterval)
+        }
+    }, [isByTimeReload])
 
     useEffect(() => {
         localStorage.setItem("currentAmount", currentAmountValue.toFixed(1))
     }, [currentAmountValue])
-
-    const formatNumber = (params) => {
-        return new Intl.NumberFormat("de-DE").format(Number(params.toFixed(0)))
-    }
 
     return (
         <main className="main" onClick={handleMainClick}>
@@ -101,15 +128,22 @@ function App() {
                     name={"Auto clicker"}
                     amount={currentAmountValue}
                     onClick={handleBySecondsPurchase}
-                    description={`$ ${(valueBySeconds.getValues().value + 0.2).toFixed(1)}/second`}
-                    cost={formatNumber(valueBySeconds.getValues().cost)}
+                    description={`$ ${valueBySeconds.showValues().value}/second`}
+                    cost={formatNumber(valueBySeconds.showValues().cost)}
                 />
                 <ShopItem
                     amount={currentAmountValue}
                     name={"Click value"}
                     onClick={handleClickPurchase}
-                    description={`$ ${valueByClick.getValues().value + 2}/click`}
-                    cost={formatNumber(valueByClick.getValues().cost)}
+                    description={`$ ${valueByClick.showValues().value}/click`}
+                    cost={formatNumber(valueByClick.showValues().cost)}
+                />
+                <ShopItem
+                    amount={currentAmountValue}
+                    name={"Thousand by time"}
+                    onClick={handleThousandByTime}
+                    description={`$ 1.000/${thousandByTime.showValues().time} seconds`}
+                    cost={formatNumber(thousandByTime.getValues().cost)}
                 />
             </div>
 

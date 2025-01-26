@@ -15,7 +15,7 @@
     outline: 1px solid #3a3a3a;
     background-color: #3a3a3a;
     color: white;
-    width: 80%;
+    width: 70%;
     align-items: center;
     justify-content: center;
     .currentAmountValue{
@@ -55,8 +55,8 @@
     padding: 8px 20px;
     cursor: pointer;
     transition: all 100ms;
-    transform: translateX(-100%);
-    opacity: 0;
+    /* transform: translateX(-100%);
+    opacity: 0; */
 
     &:active {
         * {
@@ -85,8 +85,8 @@
 }
 
 .showItem {
-    transform: translateX(0%);
-    opacity: 1;
+    /* transform: translateX(0%);
+    opacity: 1; */
 }
 
 .popup {
