@@ -73,7 +73,7 @@ function App() {
     }
 
     const handleThousandByTime = () => {
-        if (currentAmountValue < thousandByTime.getValues().cost || thousandByTime.getValues().time === 10) return
+        if (currentAmountValue < thousandByTime.getValues().cost) return
         decreaseCurrentAmountValue(thousandByTime.getValues().cost)
         thousandByTime.increase()
         setIsByTimeReload(!isByTimeReload)
