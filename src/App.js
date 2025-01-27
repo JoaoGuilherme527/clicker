@@ -111,9 +111,9 @@ function App() {
         localStorage.setItem("currentAmount", currentAmountValue.toFixed(1))
     }, [currentAmountValue])
 
-    // useLayoutEffect(() => {
-    //   localStorage.clear()
-    // }, [])
+    useLayoutEffect(() => {
+      localStorage.clear()
+    }, [])
 
     return (
         <main className="main" onClick={handleMainClick}>
