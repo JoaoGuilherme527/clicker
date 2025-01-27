@@ -24,7 +24,7 @@ export class ValueBySeconds {
     }
 
     increaseCost() {
-        this.cost = Number((this.valueBySeconds * 50 + 25).toFixed(0))
+        this.cost = Number((this.valueBySeconds * 25 + 25).toFixed(0))
     }
     increaseValue() {
         this.valueBySeconds += 1
