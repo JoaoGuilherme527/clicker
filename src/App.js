@@ -15,7 +15,7 @@ function App() {
     }, [])
     const valueByClick = useMemo(() => {
         const isStorage = localStorage.getItem("valueByClick")
-        const {cost, value} = isStorage ? JSON.parse(isStorage) : {cost: 100, value: 1}
+        const {cost, value} = isStorage ? JSON.parse(isStorage) : {cost: 200, value: 1}
         return new ValueByClick(cost, value)
     }, [])
 
