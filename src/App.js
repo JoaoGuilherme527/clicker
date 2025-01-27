@@ -10,18 +10,18 @@ import {ThousandByTime} from "./ThousandByTime.class.js"
 function App() {
     const valueBySeconds = useMemo(() => {
         const isStorage = localStorage.getItem("valueBySeconds")
-        const {cost, value} = isStorage ? JSON.parse(isStorage) : {cost: 100, value: 0}
+        const {cost, value} = isStorage ? JSON.parse(isStorage) : {cost: 25, value: 0}
         return new ValueBySeconds(cost, value)
     }, [])
     const valueByClick = useMemo(() => {
         const isStorage = localStorage.getItem("valueByClick")
-        const {cost, value} = isStorage ? JSON.parse(isStorage) : {cost: 200, value: 1}
+        const {cost, value} = isStorage ? JSON.parse(isStorage) : {cost: 100, value: 1}
         return new ValueByClick(cost, value)
     }, [])
 
     const thousandByTime = useMemo(() => {
         const isStorage = localStorage.getItem("thousandByTime")
-        const {cost, time, value} = isStorage ? JSON.parse(isStorage) : {cost: 1000, time: 70, value: 0}
+        const {cost, time, value} = isStorage ? JSON.parse(isStorage) : {cost: 500, time: 70, value: 0}
         return new ThousandByTime(cost, time, value)
     }, [])
     const storageAmount = localStorage.getItem("currentAmount") ? localStorage.getItem("currentAmount") : 0
@@ -47,7 +47,7 @@ function App() {
         const popupX = x !== null ? x : Math.random() * 90
         const popupY = y !== null ? y : Math.random() * 90
 
-        setPopups((prev) => [...prev, {id, value: `+$ ${value}`, x: popupX, y: popupY}])
+        setPopups((prev) => [...prev, {id, value: `+$ ${formatNumber(value)}`, x: popupX, y: popupY}])
 
         setTimeout(() => {
             setPopups((prev) => prev.filter((popup) => popup.id !== id))
@@ -111,9 +111,9 @@ function App() {
         localStorage.setItem("currentAmount", currentAmountValue.toFixed(1))
     }, [currentAmountValue])
 
-    // useLayoutEffect(() => {
-    //   localStorage.clear()
-    // }, [])
+    useLayoutEffect(() => {
+      localStorage.clear()
+    }, [])
 
     return (
         <main className="main" onClick={handleMainClick}>
@@ -123,8 +123,9 @@ function App() {
                     {currentAmountValue >= 1000000 ? formatNumber(currentAmountValue).slice(0, 5) : formatNumber(currentAmountValue)}
                     {valueBySeconds.convert(currentAmountValue)}
                 </div>
-                {thousandByTime.getValues().value > 0 ? <p>$ 1.000 each {thousandByTime.getValues().time} seconds</p> : <></>}
-                <p>per second: $ {valueBySeconds.getValues().value}</p>
+                {thousandByTime.getValues().value > 0 ? <p>$ 1.000 each {thousandByTime.getValues().time} seconds</p> : <p></p>}
+                {valueBySeconds.getValues().value > 0 ? <p>per second: $ {formatNumber(valueBySeconds.getValues().value)}</p> : <p></p>}
+                <p>$ {formatNumber(valueByClick.getValues().value)} per click</p>
             </div>
             <button className="mainButton">CLICK</button>
 
@@ -133,14 +134,14 @@ function App() {
                     name={"Auto clicker"}
                     amount={currentAmountValue}
                     onClick={handleBySecondsPurchase}
-                    description={`$ ${valueBySeconds.showValues().value}/second`}
+                    description={`$ ${formatNumber(valueBySeconds.showValues().value)}/second`}
                     cost={formatNumber(valueBySeconds.showValues().cost)}
                 />
                 <ShopItem
                     amount={currentAmountValue}
                     name={"Click value"}
                     onClick={handleClickPurchase}
-                    description={`$ ${valueByClick.showValues().value}/click`}
+                    description={`$ ${formatNumber(valueByClick.showValues().value)}/click`}
                     cost={formatNumber(valueByClick.showValues().cost)}
                 />
                 <ShopItem
@@ -148,7 +149,7 @@ function App() {
                     name={"Thousand by time"}
                     onClick={handleThousandByTime}
                     description={`$ 1.000/${thousandByTime.showValues().time} seconds`}
-                    cost={formatNumber(thousandByTime.getValues().cost)}
+                    cost={formatNumber(thousandByTime.showValues().cost)}
                 />
             </div>
 

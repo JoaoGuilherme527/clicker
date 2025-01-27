@@ -5,22 +5,22 @@ export class ValueByClick {
     }
 
     increaseBoth() {
-        this.increaseCost()
         this.increaseValue()
+        this.increaseCost()
         localStorage.setItem("valueByClick", JSON.stringify({cost: this.cost, value: this.valueByClick}))
     }
 
     increaseCost() {
-        this.cost = Number((this.cost + this.cost * 0.8).toFixed(1))
+        this.cost = Number((this.valueByClick * 100 + 500).toFixed(0))
     }
     increaseValue() {
-        this.valueByClick = Number((this.valueByClick + this.valueByClick * 0.5).toFixed(1))
+        this.valueByClick += 1
     }
 
     showValues() {
         return {
             cost: this.cost,
-            value: (this.valueByClick + this.valueByClick * 0.5).toFixed(1),
+            value: this.valueByClick + 1,
         }
     }
 

@@ -18,22 +18,22 @@ export class ValueBySeconds {
     }
 
     increaseBoth() {
-        this.increaseCost()
         this.increaseValue()
+        this.increaseCost()
         localStorage.setItem("valueBySeconds", JSON.stringify({cost: this.cost, value: this.valueBySeconds}))
     }
 
     increaseCost() {
-        this.cost = Number((this.cost + this.cost * 0.05).toFixed(1))
+        this.cost = Number((this.valueBySeconds * 50 + 25).toFixed(0))
     }
     increaseValue() {
-        this.valueBySeconds = Number((this.valueBySeconds + 1).toFixed(1))
+        this.valueBySeconds += 1
     }
 
     showValues() {
         return {
             cost: this.cost,
-            value: Number((this.valueBySeconds + 1).toFixed(1)),
+            value: this.valueBySeconds + 1,
         }
     }
 

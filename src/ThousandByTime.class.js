@@ -13,7 +13,7 @@ export class ThousandByTime {
     }
 
     increaseCost() {
-        this.cost = this.cost * 3
+        this.cost = Math.floor(this.cost * (this.time > 10 ? 3 : 1.5))
     }
 
     increaseValue() {
@@ -21,13 +21,17 @@ export class ThousandByTime {
     }
 
     decreaseTime() {
-        this.time = this.time - 10
+        if (this.time > 10) {
+            this.time -= 10
+        } else {
+            this.time -= 2
+        }
     }
 
     showValues() {
         return {
             cost: this.cost,
-            time: this.time - 10,
+            time: this.time > 10 ? this.time - 10 : this.time -2,
             value: this.value,
         }
     }
