@@ -92,6 +92,10 @@
     }
 }
 
+.disabled{
+    display: none;
+}
+
 .popup {
     position: absolute;
     font-size: 0.5em;

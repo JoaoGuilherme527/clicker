@@ -3,9 +3,9 @@
 import {useEffect, useState, useMemo, useLayoutEffect} from "react"
 import "./App.css"
 import ShopItem from "./components/buttons/ShopItem"
-import {ValueBySeconds} from "./ValueBySeconds.class.js"
-import {ValueByClick} from "./ValueByClick.class.js"
-import {ThousandByTime} from "./ThousandByTime.class.js"
+import {ValueBySeconds} from "./classes/ValueBySeconds.class.js"
+import {ValueByClick} from "./classes/ValueByClick.class.js"
+import {ThousandByTime} from "./classes/ThousandByTime.class.js"
 
 function App() {
     const valueBySeconds = useMemo(() => {
@@ -24,7 +24,8 @@ function App() {
         const {cost, time, value} = isStorage ? JSON.parse(isStorage) : {cost: 500, time: 70, value: 0}
         return new ThousandByTime(cost, time, value)
     }, [])
-    const storageAmount = localStorage.getItem("currentAmount") ? localStorage.getItem("currentAmount") : 0
+    // const storageAmount = localStorage.getItem("currentAmount") ? localStorage.getItem("currentAmount") : 1000000000
+    const storageAmount = 1000000000
     const [currentAmountValue, setCurrentAmountValue] = useState(Number(storageAmount))
     const [isBySecondsReload, setIsBySecondsReload] = useState(false)
     const [isByTimeReload, setIsByTimeReload] = useState(false)
@@ -73,7 +74,7 @@ function App() {
     }
 
     const handleThousandByTime = () => {
-        if (currentAmountValue < thousandByTime.getValues().cost) return
+        if (currentAmountValue < thousandByTime.getValues().cost ) return
         decreaseCurrentAmountValue(thousandByTime.getValues().cost)
         thousandByTime.increase()
         setIsByTimeReload(!isByTimeReload)
@@ -111,9 +112,9 @@ function App() {
         localStorage.setItem("currentAmount", currentAmountValue.toFixed(1))
     }, [currentAmountValue])
 
-    // useLayoutEffect(() => {
-    //   localStorage.clear()
-    // }, [])
+    useLayoutEffect(() => {
+        localStorage.clear()
+    }, [])
 
     return (
         <main className="main" onClick={handleMainClick}>
@@ -150,6 +151,7 @@ function App() {
                     onClick={handleThousandByTime}
                     description={`$ 1.000/${thousandByTime.showValues().time} seconds`}
                     cost={formatNumber(thousandByTime.showValues().cost)}
+                    disabled={thousandByTime.getValues().time <= 0}
                 />
             </div>
 

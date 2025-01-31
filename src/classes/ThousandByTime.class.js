@@ -23,6 +23,8 @@ export class ThousandByTime {
     decreaseTime() {
         if (this.time > 10) {
             this.time -= 10
+        } else if (this.time === 2) {
+            this.time -= 1
         } else {
             this.time -= 2
         }
@@ -31,7 +33,7 @@ export class ThousandByTime {
     showValues() {
         return {
             cost: this.cost,
-            time: this.time > 10 ? this.time - 10 : this.time -2,
+            time: this.time > 10 ? this.time - 10 : this.time - 2,
             value: this.value,
         }
     }
