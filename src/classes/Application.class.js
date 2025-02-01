@@ -6,7 +6,7 @@ export class App {
     valueBySeconds = {cost: 25, value: 0}
     valueByClick = {cost: 200, value: 1}
     thousandByTime = {cost: 500, value: 0, time: 70}
-    currentAmount = 1000000000
+    currentAmount = 0
 
     constructor() {
         const currentAmountStorage = localStorage.getItem("currentAmount")
