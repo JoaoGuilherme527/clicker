@@ -1,3 +1,5 @@
+import {formatNumber} from "../utils/formatNumbertoCurrency"
+
 export class ValueBySeconds {
     orderOfMagnitudeTable = {
         6: "Million",
@@ -11,36 +13,40 @@ export class ValueBySeconds {
         30: "Nonillion",
         33: "Decillion",
     }
+    name = "Auto clicker"
+    disabled = false
 
-    constructor(cost, valueBySeconds) {
+    constructor({cost, value}) {
         this.cost = cost
-        this.valueBySeconds = valueBySeconds
+        this.value = value
+        this.description = `$ ${formatNumber(value + 1)}/second`
     }
 
-    increaseBoth() {
+    increase() {
         this.increaseValue()
         this.increaseCost()
-        localStorage.setItem("valueBySeconds", JSON.stringify({cost: this.cost, value: this.valueBySeconds}))
+        localStorage.setItem("valueBySeconds", JSON.stringify({cost: this.cost, value: this.value}))
     }
 
     increaseCost() {
-        this.cost = Number((this.valueBySeconds * 10 + 300).toFixed(0))
+        this.cost = Number((this.value * 10 + 300).toFixed(0))
     }
+    
     increaseValue() {
-        this.valueBySeconds += 1
+        this.value += 1
     }
 
     showValues() {
         return {
             cost: this.cost,
-            value: this.valueBySeconds + 1,
+            value: this.value + 1,
         }
     }
 
     getValues() {
         return {
             cost: this.cost,
-            value: this.valueBySeconds,
+            value: this.value,
         }
     }
 

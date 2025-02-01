@@ -1,8 +1,16 @@
 export class ThousandByTime {
-    constructor(cost, time, value) {
+    name = "Thousand by time"
+    disabled = this.showValues().time === 0
+
+    constructor({cost, time, value}) {
         this.cost = cost
         this.time = time
         this.value = value
+        this.description = `$ 1.000/${time > 10 ? time - 10 : time - 2} seconds`
+
+    }
+
+    handlePurchase(currentAmount, callBack){
     }
 
     increase() {

@@ -1,33 +1,43 @@
+import { formatNumber } from "../utils/formatNumbertoCurrency"
+
 export class ValueByClick {
-    constructor(cost, valueByClick) {
+    name = "Click value"
+    description = `$ ${formatNumber(this.showValues().value)}/click`
+    disabled = false
+
+    constructor({cost, value}) {
         this.cost = cost
-        this.valueByClick = valueByClick
+        this.value = value
+        this.description = `$ 1.000/${value + 1} seconds`
+
     }
 
-    increaseBoth() {
+    handlePurchase(currentAmount, callBack) {}
+
+    increase() {
         this.increaseValue()
         this.increaseCost()
-        localStorage.setItem("valueByClick", JSON.stringify({cost: this.cost, value: this.valueByClick}))
+        localStorage.setItem("valueByClick", JSON.stringify({cost: this.cost, value: this.value}))
     }
 
     increaseCost() {
-        this.cost = Number((this.valueByClick * 10 + 800).toFixed(0))
+        this.cost = Number((this.value * 10 + 800).toFixed(0))
     }
     increaseValue() {
-        this.valueByClick += 1
+        this.value += 1
     }
 
     showValues() {
         return {
             cost: this.cost,
-            value: this.valueByClick + 1,
+            value: this.value + 1,
         }
     }
 
     getValues() {
         return {
             cost: this.cost,
-            value: this.valueByClick,
+            value: this.value,
         }
     }
 }
