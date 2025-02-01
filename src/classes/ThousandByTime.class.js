@@ -10,9 +10,6 @@ export class ThousandByTime {
 
     }
 
-    handlePurchase(currentAmount, callBack){
-    }
-
     increase() {
         this.increaseCost()
         this.decreaseTime()
