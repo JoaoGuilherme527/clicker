@@ -2,13 +2,12 @@ import { formatNumber } from "../utils/formatNumbertoCurrency"
 
 export class ValueByClick {
     name = "Click value"
-    description = `$ ${formatNumber(this.showValues().value)}/click`
     disabled = false
 
     constructor({cost, value}) {
         this.cost = cost
         this.value = value
-        this.description = `$ 1.000/${value + 1} seconds`
+        this.description = `$ ${formatNumber(value + 1)}/click`
 
     }
 
