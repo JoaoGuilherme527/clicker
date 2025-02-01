@@ -8,7 +8,6 @@ import {formatNumber} from "./utils/formatNumbertoCurrency.js"
 
 function Home() {
     const app = useMemo(() => new App(), [])
-    // const storageAmount = localStorage.getItem("currentAmount") ? localStorage.getItem("currentAmount") : 1000000000
     const storageAmount = app.currentAmount
     const [currentAmountValue, setCurrentAmountValue] = useState(Number(storageAmount))
     const [isBySecondsReload, setIsBySecondsReload] = useState(false)
