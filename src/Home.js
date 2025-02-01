@@ -104,7 +104,7 @@ function Home() {
 
     useLayoutEffect(() => {
         // localStorage.clear()
-        console.log(app.itens)
+        // console.log(app.itens)
     }, [])
 
     return (
