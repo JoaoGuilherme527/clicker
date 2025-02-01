@@ -11,8 +11,6 @@ export class ValueByClick {
 
     }
 
-    handlePurchase(currentAmount, callBack) {}
-
     increase() {
         this.increaseValue()
         this.increaseCost()
