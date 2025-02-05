@@ -6,10 +6,12 @@
     font-family: "Kodchasan", serif;
     font-weight: 300;
     font-style: normal;
+    user-select: none;
+
+    /* border: 1px solid red; */
     strong {
         font-weight: 600;
     }
-    user-select: none;
 }
 
 body {

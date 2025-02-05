@@ -13,6 +13,7 @@ function Home() {
     const [isBySecondsReload, setIsBySecondsReload] = useState(false)
     const [isByTimeReload, setIsByTimeReload] = useState(false)
     const [popups, setPopups] = useState([])
+    const [isDrawerClose, setIsDrawerClose] = useState(false)
 
     const increaseCurrentAmountValue = (value, isMainClick) => {
         setCurrentAmountValue((prevState) => prevState + value)
@@ -108,35 +109,79 @@ function Home() {
     }, [])
 
     return (
-        <main className="main" onClick={handleMainClick}>
-            <div className="currentAmountValueWrapper">
-                {renderCurrentAmount()}
-                {renderThousandByTime()}
-                {renderValueBySeconds()}
-                {renderValueByClick()}
-            </div>
-            <button className="mainButton">CLICK</button>
-            <div className="shop">
-                {app.itens.map(({name, cost, description, disabled}, index) => (
-                    <ShopItem
-                        name={name}
-                        amount={currentAmountValue}
-                        onClick={() => {
-                            if (currentAmountValue < cost) return
-                            decreaseCurrentAmountValue(cost)
-                            app.itens[index].increase()
+        // <main className="main" onClick={handleMainClick}>
+        //     <div className="currentAmountValueWrapper">
+        //         {renderCurrentAmount()}
+        //         {renderThousandByTime()}
+        //         {renderValueBySeconds()}
+        //         {renderValueByClick()}
+        //     </div>
+        //     <button className="mainButton">CLICK</button>
+        //     <div className="shop">
+        //         {app.itens.map(({name, cost, description, disabled}, index) => (
+        //             <ShopItem
+        //                 name={name}
+        //                 amount={currentAmountValue}
+        //                 onClick={() => {
+        //                     if (currentAmountValue < cost) return
+        //                     decreaseCurrentAmountValue(cost)
+        //                     app.itens[index].increase()
 
-                            if (name === "Auto clicker") {
-                                setIsBySecondsReload(!isBySecondsReload)
-                            } else if (name === "Thousand by time") {
-                                setIsByTimeReload(!isByTimeReload)
-                            }
-                        }}
-                        description={description}
-                        cost={cost}
-                        disabled={disabled}
-                    />
-                ))}
+        //                     if (name === "Auto clicker") {
+        //                         setIsBySecondsReload(!isBySecondsReload)
+        //                     } else if (name === "Thousand by time") {
+        //                         setIsByTimeReload(!isByTimeReload)
+        //                     }
+        //                 }}
+        //                 description={description}
+        //                 cost={cost}
+        //                 disabled={disabled}
+        //             />
+        //         ))}
+        //     </div>
+        //     {popups.map((popup) => (
+        //         <span
+        //             key={popup.id}
+        //             className="popup"
+        //             style={{
+        //                 top: `${popup.y}%`,
+        //                 left: `${popup.x}%`,
+        //             }}
+        //         >
+        //             {popup.value}
+        //         </span>
+        //     ))}
+        // </main>
+
+        <main className="main" onClick={handleMainClick}>
+            <div className="shop-drawer">
+                <label className="openDrawerButton">
+                    <h1>
+                        Market <img className="chevron" src="/chevron-up.svg" />
+                    </h1>
+                    <input hidden onChange={() => setIsDrawerClose(!isDrawerClose)} className="checkBox" type="checkbox" />
+                </label>
+                <div className="shop">
+                    {app.itens.map(({name, cost, description, disabled}, index) => (
+                        <ShopItem
+                            name={name}
+                            amount={currentAmountValue}
+                            onClick={() => {
+                                if (currentAmountValue < cost) return
+                                decreaseCurrentAmountValue(cost)
+                                app.itens[index].increase()
+                                if (name === "Auto clicker") {
+                                    setIsBySecondsReload(!isBySecondsReload)
+                                } else if (name === "Thousand by time") {
+                                    setIsByTimeReload(!isByTimeReload)
+                                }
+                            }}
+                            description={description}
+                            cost={cost}
+                            disabled={disabled}
+                        />
+                    ))}
+                </div>
             </div>
             {popups.map((popup) => (
                 <span

@@ -6,6 +6,49 @@
     transition: all 100ms;
 }
 
+.shop-drawer {
+    transition: all 300ms;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 30px;
+    position: absolute;
+    height: 10%;
+    bottom: 0;
+    &:has(.checkBox:checked) {
+        height: 50%;
+        .chevron {
+            transform: translateY(50%) rotate(-180deg);
+        }
+    }
+}
+
+.openDrawerButton {
+    transition: all 300ms;
+    padding: 4px 16px;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 20px;
+    text-align: center;
+    color: #3a3a3acc;
+
+    h1 {
+        position: relative;
+
+        .chevron {
+            transition: all 300ms;
+            position: absolute;
+            bottom: 50%;
+            transform: translateY(50%);
+        }
+    }
+
+    &:active {
+        color: white;
+    }
+}
+
 .currentAmountValueWrapper {
     display: flex;
     flex-direction: column;
@@ -92,7 +135,7 @@
     }
 }
 
-.disabled{
+.disabled {
     display: none;
 }
 
